@@ -351,4 +351,72 @@ public class BTree<E extends Comparable<E>> {
         parent.childs.set(parent.count, null);
         parent.count--;
     }
+
+    public static BTree<Integer> building_Btree() {
+        int orden = 4;
+        BTree<Integer> bTree = new BTree<>(orden);
+
+        // Crear nodos hoja (nivel 2)
+        BNode<Integer> n0 = new BNode<>(orden, 0);
+        n0.keys.set(0, 1);
+        n0.keys.set(1, 3);
+        n0.keys.set(2, 8);
+        n0.count = 3;
+
+        BNode<Integer> n1 = new BNode<>(orden, 1);
+        n1.keys.set(0, 12);
+        n1.keys.set(1, 15);
+        n1.count = 2;
+
+        BNode<Integer> n3 = new BNode<>(orden, 3);
+        n3.keys.set(0, 18);
+        n3.keys.set(1, 19);
+        n3.keys.set(2, 21);
+        n3.count = 3;
+
+        BNode<Integer> n4 = new BNode<>(orden, 4);
+        n4.keys.set(0, 27);
+        n4.keys.set(1, 28);
+        n4.count = 2;
+
+        BNode<Integer> n8 = new BNode<>(orden, 8);
+        n8.keys.set(0, 33);
+        n8.keys.set(1, 36);
+        n8.keys.set(2, 39);
+        n8.count = 3;
+
+        BNode<Integer> n7 = new BNode<>(orden, 7);
+        n7.keys.set(0, 42);
+        n7.keys.set(1, 45);
+        n7.count = 2;
+
+        // Crear nodos intermedios (nivel 1)
+        BNode<Integer> n2 = new BNode<>(orden, 2);
+        n2.keys.set(0, 10);
+        n2.keys.set(1, 16);
+        n2.count = 2;
+        n2.childs.set(0, n0);
+        n2.childs.set(1, n1);
+        n2.childs.set(2, n3);
+
+        BNode<Integer> n5 = new BNode<>(orden, 5);
+        n5.keys.set(0, 30);
+        n5.keys.set(1, 40);
+        n5.count = 2;
+        n5.childs.set(0, n4);
+        n5.childs.set(1, n8);
+        n5.childs.set(2, n7);
+
+        // Crear nodo raíz (nivel 0)
+        BNode<Integer> n6 = new BNode<>(orden, 6);
+        n6.keys.set(0, 25);
+        n6.count = 1;
+        n6.childs.set(0, n2);
+        n6.childs.set(1, n5);
+
+        bTree.setRoot(n6);
+
+        return bTree;
+    }
+
 }

@@ -58,25 +58,27 @@ public class BNode<E extends Comparable<E>> {
         return count == 0;
     }
 
-    // Método para buscar una clave dentro del nodo
-    // Retorna: [true, posición] si se encuentra
-    //          [false, posición] si no se encuentra pero da la posición donde debería ir
     public Object[] searchNode(E claveBuscada) {
-        int posicion = 0;
+    int posicion = 0;
 
-        // Recorre las claves hasta que encuentra una mayor o igual
-        while (posicion < count && claveBuscada.compareTo(keys.get(posicion)) > 0) {
-            posicion++;
-        }
+    while (posicion < count) {
+        E actual = keys.get(posicion);
+        if (actual == null) break;
 
-        // Si la clave fue encontrada en esa posición
-        if (posicion < count && claveBuscada.compareTo(keys.get(posicion)) == 0) {
+        int cmp = claveBuscada.compareTo(actual);
+
+        if (cmp == 0) {
             return new Object[]{true, posicion};
+        } else if (cmp < 0) {
+            break;
         }
 
-        // Si no fue encontrada, retorna la posición donde se debería insertar o seguir buscando
-        return new Object[]{false, posicion};
+        posicion++;
     }
+
+    return new Object[]{false, posicion};
+    }
+
 
     // Método toString que devuelve una cadena con el ID del nodo y sus claves actuales
     @Override

@@ -2,6 +2,7 @@ package btree;
 
 public class Main {
     public static void main(String[] args) {
+        /*
         // Crear un árbol B de orden 4 (máximo 3 claves por nodo)
         BTree<Integer> bTree = new BTree<>(4);
 
@@ -89,6 +90,12 @@ public class Main {
         
         boolean found1 = bTree.search(52);
         System.out.println("Resultado de la búsqueda: " + found1);
+        */
+
+        BTree<Integer> arbol = BTree.building_Btree();
+        System.out.println("Árbol B generado desde archivo:");
+        System.out.println(arbol);
+    
 
     }
 }
