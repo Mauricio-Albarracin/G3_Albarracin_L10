@@ -21,6 +21,11 @@ public class BNode<E extends Comparable<E>> {
 
     // Constructor que inicializa un nodo con capacidad para n claves
     public BNode(int n) {
+        this(n, ++idCounter); // Usa el contador estático por defecto
+    }
+
+    // Constructor que permite especificar un ID personalizado
+    public BNode(int n, int idNode) {
         // Inicializa la lista de claves con capacidad n
         this.keys = new ArrayList<E>(n);
         
@@ -30,8 +35,8 @@ public class BNode<E extends Comparable<E>> {
         // Inicializa el contador de claves en 0
         this.count = 0;
 
-        // Asigna un ID único al nodo y lo incrementa globalmente
-        this.idNode = ++idCounter;
+        // Asigna el ID especificado
+        this.idNode = idNode;
 
         // Llena las listas con valores null como posición inicial
         for (int i = 0; i < n; i++) {
