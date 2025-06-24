@@ -80,5 +80,15 @@ public class Main {
         System.out.println("\nBuscando la clave 52:");
         boolean found = bTree.search(52);
         System.out.println("Resultado de la búsqueda: " + found);
+
+        // Eliminar la clave 52
+        System.out.println("\nEliminando la clave 52:");
+        bTree.remove(52);
+        System.out.println("Estructura del árbol después de eliminar 52:");
+        System.out.println(bTree.toString());
+        
+        boolean found1 = bTree.search(52);
+        System.out.println("Resultado de la búsqueda: " + found1);
+
     }
 }
