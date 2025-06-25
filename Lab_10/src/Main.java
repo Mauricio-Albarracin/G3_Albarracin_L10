@@ -1,4 +1,4 @@
-package btree;
+import btree.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -92,10 +92,56 @@ public class Main {
         System.out.println("Resultado de la búsqueda: " + found1);
         */
 
-        BTree<Integer> arbol = BTree.building_Btree();
+        /*BTree<Integer> arbol = BTree.building_Btree();
         System.out.println("Árbol B generado desde archivo:");
-        System.out.println(arbol);
+        System.out.println(arbol); */
     
+        BTree<RegistroEstudiante> arbol = new BTree<>(4); 
 
+        // Inserción de estudiantes
+        arbol.insert(new RegistroEstudiante(103, "Ana"));
+        arbol.insert(new RegistroEstudiante(110, "Luis"));
+        arbol.insert(new RegistroEstudiante(101, "Carlos"));
+        arbol.insert(new RegistroEstudiante(120, "Lucía"));
+        arbol.insert(new RegistroEstudiante(115, "David"));
+        arbol.insert(new RegistroEstudiante(125, "Jorge"));
+        arbol.insert(new RegistroEstudiante(140, "Camila"));
+        arbol.insert(new RegistroEstudiante(108, "Margarita"));
+        arbol.insert(new RegistroEstudiante(132, "Ernesto"));
+        arbol.insert(new RegistroEstudiante(128, "Denis"));
+        arbol.insert(new RegistroEstudiante(145, "Enrique"));
+        arbol.insert(new RegistroEstudiante(122, "Karina"));
+        arbol.insert(new RegistroEstudiante(108, "Juan")); // duplicado, será ignorado
+        
+        // Búsquedas
+        buscar(arbol, 115); // David
+        buscar(arbol, 132); // Ernesto
+        buscar(arbol, 999); // No encontrado
+
+        // Eliminar código 101 (Carlos)
+        System.out.println("Eliminando estudiante con código 101...");
+        arbol.remove(new RegistroEstudiante(101, "")); // solo importa el código
+
+        // Insertar nueva estudiante
+        System.out.println("Insertando estudiante con código 106...");
+        arbol.insert(new RegistroEstudiante(106, "Sara"));
+
+        // Buscar 106
+        buscar(arbol, 106); // Sara
+
+        // Mostrar árbol
+        System.out.println("\nEstructura del árbol:");
+        System.out.println(arbol);
     }
+
+    private static void buscar(BTree<RegistroEstudiante> arbol, int codigo) {
+    String nombre = arbol.buscarNombre(codigo);  // usar el método correcto que devuelve un String
+    if (nombre != null) {
+        System.out.println("Encontrado: " + codigo + " - " + nombre);
+    } else {
+        System.out.println("Código " + codigo + ": No encontrado");
+        }
+    }
+
+
 }

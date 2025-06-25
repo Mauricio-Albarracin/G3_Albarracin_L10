@@ -170,6 +170,7 @@ public class BTree<E extends Comparable<E>> {
         return s;
     }
 
+    /* 
     // Método público de búsqueda
     public boolean search(E cl) {
         return searchRecursive(this.root, cl);
@@ -177,6 +178,8 @@ public class BTree<E extends Comparable<E>> {
 
     // Método recursivo de soporte para buscar una clave en el árbol
     private boolean searchRecursive(BNode<E> current, E cl) {
+        if (current == null) return false;
+
         if (current == null) return false;
 
         Object[] result = current.searchNode(cl);
@@ -190,7 +193,39 @@ public class BTree<E extends Comparable<E>> {
             // Continuar búsqueda en el hijo correspondiente
             return searchRecursive(current.childs.get(pos), cl);
         }
+    }*/
+
+    // Ejercicio 4
+    // Método público que busca un estudiante por su código y devuelve su nombre
+    public String buscarNombre(int codigo) {
+        return buscarNombreRecursivo(this.root, codigo);
     }
+
+    // Método recursivo que busca en el árbol B un estudiante con el código dado
+    private String buscarNombreRecursivo(BNode<E> current, int codigo) {
+        if (current == null) return null;
+
+        for (int i = 0; i < current.count; i++) {
+            // Llamada recursiva al hijo izquierdo si existe
+            String result = buscarNombreRecursivo(current.childs.get(i), codigo);
+            if (result != null) return result;
+
+            // Verifica si el elemento en la posición actual es un RegistroEstudiante
+            E elemento = current.keys.get(i);
+            if (elemento instanceof RegistroEstudiante) {
+                RegistroEstudiante re = (RegistroEstudiante) elemento;
+                if (re.getCodigo() == codigo) {
+                    return re.getNombre();
+                }
+            }
+        }
+
+        // Revisa el último hijo
+        return buscarNombreRecursivo(current.childs.get(current.count), codigo);
+    }
+
+
+
 
     public void setRoot(BNode<E> root) {
         this.root = root;
